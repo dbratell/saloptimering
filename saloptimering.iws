@@ -11,85 +11,91 @@
   </component>
   <component name="FileEditorManager">
     <history>
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/GroupTableModel.java" line="48" column="0" vertical-scroll-proportion="-1.2093023" horizontal-scroll-proportion="0.0" />
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/Configuration.java" line="21" column="0" vertical-scroll-proportion="0.7659575" horizontal-scroll-proportion="0.0" />
-      <source-position-entry url="jar://J:/Program Files/Java/j2sdk1.4.1/src.zip!/javax/swing/JTable.java" line="3692" column="0" vertical-scroll-proportion="0.3096647" horizontal-scroll-proportion="0.0" />
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/SimAnnealProgressListener.java" line="15" column="9" vertical-scroll-proportion="0.87931037" horizontal-scroll-proportion="0.13490364" />
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/test/Simplex.java" line="4" column="0" vertical-scroll-proportion="0.21935484" horizontal-scroll-proportion="0.0">
+      <source-position-entry url="jar://J:/Program Files/Java/j2sdk1.4.1/src.zip!/javax/swing/SwingConstants.java" line="18" column="0" vertical-scroll-proportion="0.056478404" horizontal-scroll-proportion="0.0" />
+      <source-position-entry url="jar://J:/Program Files/Java/j2sdk1.4.1/src.zip!/javax/swing/plaf/LabelUI.java" line="16" column="1" vertical-scroll-proportion="0.60465115" horizontal-scroll-proportion="0.01076923" />
+      <source-position-entry url="jar://J:/Program Files/Java/j2sdk1.4.1/src.zip!/javax/swing/JLabel.java" line="412" column="32" vertical-scroll-proportion="0.2680965" horizontal-scroll-proportion="0.47965738" />
+      <source-position-entry url="jar://J:/Program Files/Java/j2sdk1.4.1/src.zip!/javax/swing/plaf/basic/BasicLabelUI.java" line="95" column="36" vertical-scroll-proportion="0.55657494" horizontal-scroll-proportion="0.53961456" />
+      <source-position-entry url="jar://J:/Program Files/Java/j2sdk1.4.1/src.zip!/java/awt/Component.java" line="1291" column="38" vertical-scroll-proportion="0.3058104" horizontal-scroll-proportion="0.56959313" />
+      <source-position-entry url="jar://J:/Program Files/Java/j2sdk1.4.1/src.zip!/javax/swing/table/DefaultTableCellRenderer.java" line="144" column="35" vertical-scroll-proportion="0.14571428" horizontal-scroll-proportion="0.52462524" />
+      <source-position-entry url="file://$PROJECT_DIR$/.cvsignore" line="1" column="0" vertical-scroll-proportion="0.051987767" horizontal-scroll-proportion="0.0" />
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/SimAnneal.java" line="171" column="0" vertical-scroll-proportion="0.0" horizontal-scroll-proportion="0.0">
         <folding>
           <element signature="imports" expanded="true" />
         </folding>
       </source-position-entry>
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/test/PrototypeSimplex.java" line="4" column="0" vertical-scroll-proportion="0.2060606" horizontal-scroll-proportion="0.0">
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/TableRowToRoomTranslator.java" line="12" column="0" vertical-scroll-proportion="0.7034483" horizontal-scroll-proportion="0.0" />
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/LoadCellRenderer.java" line="59" column="17" vertical-scroll-proportion="1.237931" horizontal-scroll-proportion="0.25105485">
         <folding>
           <element signature="imports" expanded="true" />
         </folding>
       </source-position-entry>
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/TableSorter.java" line="242" column="29" vertical-scroll-proportion="0.33333334" horizontal-scroll-proportion="0.3123077">
-        <folding>
-          <element signature="imports" expanded="true" />
-        </folding>
-      </source-position-entry>
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/SimAnneal.java" line="253" column="17" vertical-scroll-proportion="0.8363636" horizontal-scroll-proportion="0.18307692">
-        <folding>
-          <element signature="imports" expanded="true" />
-        </folding>
-      </source-position-entry>
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/PlacementWithCost.java" line="38" column="0" vertical-scroll-proportion="0.4151515" horizontal-scroll-proportion="0.0" />
       <source-position-entry url="file://$PROJECT_DIR$/src/salopt/TableMap.java" line="0" column="0" vertical-scroll-proportion="0.0" horizontal-scroll-proportion="0.0" />
-      <source-position-entry url="file://$PROJECT_DIR$/build.xml" line="31" column="29" vertical-scroll-proportion="0.28181818" horizontal-scroll-proportion="0.3123077" />
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/LoadCellRenderer.java" line="19" column="69" vertical-scroll-proportion="0.33333334" horizontal-scroll-proportion="0.7430769" />
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/RoomTableModel.java" line="120" column="23" vertical-scroll-proportion="0.33333334" horizontal-scroll-proportion="0.2476923" />
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/MainWindow.java" line="157" column="0" vertical-scroll-proportion="0.6909091" horizontal-scroll-proportion="0.0">
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/PercentCellRenderer.java" line="38" column="8" vertical-scroll-proportion="1.4965518" horizontal-scroll-proportion="0.11814346">
         <folding>
           <element signature="imports" expanded="true" />
         </folding>
       </source-position-entry>
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/Prototype.java" line="592" column="5" vertical-scroll-proportion="0.8969697" horizontal-scroll-proportion="0.053846154">
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/RoomTableModel.java" line="53" column="4" vertical-scroll-proportion="0.41034484" horizontal-scroll-proportion="0.05907173" />
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/Prototype.java" line="469" column="0" vertical-scroll-proportion="0.9517241" horizontal-scroll-proportion="0.0">
+        <folding>
+          <element signature="imports" expanded="true" />
+        </folding>
+      </source-position-entry>
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/TableSorter.java" line="404" column="10" vertical-scroll-proportion="0.8827586" horizontal-scroll-proportion="0.14767933">
         <folding>
           <element signature="imports" expanded="true" />
         </folding>
       </source-position-entry>
     </history>
     <open-files>
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/Prototype.java" line="592" column="5" vertical-scroll-proportion="0.8969697" horizontal-scroll-proportion="0.053846154" selected="true">
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/Prototype.java" line="469" column="0" vertical-scroll-proportion="0.9517241" horizontal-scroll-proportion="0.0">
         <folding>
           <element signature="imports" expanded="true" />
         </folding>
       </source-position-entry>
-      <source-position-entry url="file://$PROJECT_DIR$/build.xml" line="31" column="29" vertical-scroll-proportion="0.28181818" horizontal-scroll-proportion="0.3123077" />
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/MainWindow.java" line="157" column="0" vertical-scroll-proportion="0.6909091" horizontal-scroll-proportion="0.0">
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/TableRowToRoomTranslator.java" line="12" column="0" vertical-scroll-proportion="0.7034483" horizontal-scroll-proportion="0.0" />
+      <source-position-entry url="file://$PROJECT_DIR$/build.xml" line="31" column="29" vertical-scroll-proportion="0.32068965" horizontal-scroll-proportion="0.42827004" />
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/SimAnneal.java" line="171" column="0" vertical-scroll-proportion="0.0" horizontal-scroll-proportion="0.0">
         <folding>
           <element signature="imports" expanded="true" />
         </folding>
       </source-position-entry>
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/SimAnneal.java" line="253" column="17" vertical-scroll-proportion="0.8363636" horizontal-scroll-proportion="0.18307692">
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/LoadCellRenderer.java" line="59" column="17" vertical-scroll-proportion="1.237931" horizontal-scroll-proportion="0.25105485">
         <folding>
           <element signature="imports" expanded="true" />
         </folding>
       </source-position-entry>
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/PlacementWithCost.java" line="38" column="0" vertical-scroll-proportion="0.4151515" horizontal-scroll-proportion="0.0" />
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/LoadCellRenderer.java" line="19" column="69" vertical-scroll-proportion="0.33333334" horizontal-scroll-proportion="0.7430769" />
-      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/RoomTableModel.java" line="120" column="23" vertical-scroll-proportion="0.33333334" horizontal-scroll-proportion="0.2476923" />
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/TableSorter.java" line="404" column="10" vertical-scroll-proportion="0.8827586" horizontal-scroll-proportion="0.14767933" selected="true">
+        <folding>
+          <element signature="imports" expanded="true" />
+        </folding>
+      </source-position-entry>
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/TableMap.java" line="0" column="0" vertical-scroll-proportion="0.0" horizontal-scroll-proportion="0.0" />
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/PercentCellRenderer.java" line="38" column="8" vertical-scroll-proportion="1.4965518" horizontal-scroll-proportion="0.11814346">
+        <folding>
+          <element signature="imports" expanded="true" />
+        </folding>
+      </source-position-entry>
+      <source-position-entry url="file://$PROJECT_DIR$/src/salopt/RoomTableModel.java" line="53" column="4" vertical-scroll-proportion="0.41034484" horizontal-scroll-proportion="0.05907173" />
     </open-files>
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="29" width="1004" height="728" extended-state="0" />
-    <editor active="true" />
+    <frame x="9" y="9" width="1016" height="728" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.24973986" order="1" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.3295082" order="2" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="docked" type="docked" visible="true" weight="0.24974306" order="1" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.24918033" order="5" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="true" weight="0.3295082" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.25" order="2" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="true" weight="0.3295082" order="7" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.3295082" order="7" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="sliding" type="sliding" visible="false" weight="0.39958376" order="0" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="docked" type="docked" visible="true" weight="0.24869928" order="0" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="docked" type="docked" visible="true" weight="0.18396711" order="0" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.4" order="3" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.24869928" order="1" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.3295082" order="1" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="sliding" type="sliding" visible="false" weight="0.3295082" order="8" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.4" order="6" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.25" order="2" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.25" order="5" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.33" order="0" />
       <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.25" order="4" />
     </layout>
@@ -180,7 +186,7 @@
         <option name="INVERSE_CLASS_FILLTERS" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/salopt/SimAnneal.java" line="558">
+      <breakpoint url="file://$PROJECT_DIR$/src/salopt/SimAnneal.java" line="567">
         <option name="ENABLED" value="true" />
         <option name="SUSPEND_VM" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
@@ -194,21 +200,7 @@
         <option name="INVERSE_CLASS_FILLTERS" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/salopt/SimAnneal.java" line="560">
-        <option name="ENABLED" value="true" />
-        <option name="SUSPEND_VM" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CONDITION" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="LOG_MESSAGE" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INVERSE_CLASS_FILLTERS" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/salopt/SimAnneal.java" line="202">
+      <breakpoint url="file://$PROJECT_DIR$/src/salopt/SimAnneal.java" line="569">
         <option name="ENABLED" value="true" />
         <option name="SUSPEND_VM" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
@@ -322,6 +314,12 @@
     <option name="GROUP_GETTERS_AND_SETTERS" value="true" />
   </component>
   <component name="CvsConfiguration">
+    <cvs_root>
+      <option name="METHOD" value="local" />
+      <option name="USER_NAME" value="" />
+      <option name="HOST" value="" />
+      <option name="REPOSITORY" value="j:/cvsroot" />
+    </cvs_root>
     <Checkout>
       <option name="DATE_TAG" value="" />
       <option name="REVISION_TAG" value="" />
@@ -345,7 +343,7 @@
     <Commit>
       <option name="NON_RECURSIVE" value="false" />
       <option name="REVISION_TAG" value="" />
-      <option name="LOG_MESSAGE" value="" />
+      <option name="LOG_MESSAGE" value="Percent view of optimal load and fixing translation from row index to room when using a sorted table. Had to modify TableSorter some." />
       <option name="ADDITIONAL_OPTIONS" value="" />
     </Commit>
     <Diff>
@@ -385,13 +383,13 @@
       <option name="NON_RECURSIVE" value="false" />
       <option name="FORCE_RECURSIVE" value="false" />
     </Editors>
-    <option name="CLIENT_PATH" value="" />
-    <option name="EXTERNAL_DIFF_PATH" />
+    <option name="CLIENT_PATH" value="j:/bin/cvs/cvs.exe" />
+    <option name="EXTERNAL_DIFF_PATH" value="" />
     <option name="USE_EXTERNAL_DIFF" value="false" />
     <option name="WORKING_FILES_READONLY" value="false" />
     <option name="COMPRESSION_LEVEL" value="0" />
     <option name="ADDITIONAL_OPTIONS" value="" />
-    <option name="BINARY_FILES_EXTENSIONS" />
+    <option name="BINARY_FILES_EXTENSIONS" value="" />
     <option name="REUSE_LAST_LOG_MESSAGE" value="false" />
     <option name="PUT_FOCUS_INTO_LOG_MESSAGE" value="false" />
     <option name="SHOW_UPDATE_OPTIONS" value="true" />
@@ -406,15 +404,18 @@
     <option name="SHOW_EDITORS_OPTIONS" value="true" />
     <option name="HIDE_UNKNOWN_FILES" value="false" />
     <option name="HIDE_MISSING_FILES" value="false" />
-    <option name="HIDE_UP_TO_DATE_FILES" value="false" />
+    <option name="HIDE_UP_TO_DATE_FILES" value="true" />
   </component>
   <component name="CvsVcs">
-    <expanded_paths />
+    <expanded_paths>
+      <path value="$PROJECT_DIR$" />
+    </expanded_paths>
   </component>
   <component name="ProjectViewSettings">
     <navigator currentView="ProjectPane" flattenPackages="false" showMembers="false" showStructure="false" autoscrollToSource="false" splitterProportion="0.5" />
     <view id="ProjectPane">
       <expanded_node type="directory" url="file://$PROJECT_DIR$" />
+      <expanded_node type="directory" url="file://$PROJECT_DIR$/src/salopt/test" />
       <expanded_node type="directory" url="file://$PROJECT_DIR$/src" />
       <expanded_node type="directory" url="file://$PROJECT_DIR$/src/salopt" />
       <expanded_node type="directory" url="file://$PROJECT_DIR$/webstart" />
@@ -635,7 +636,7 @@
     </todo-panel>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="ACTIVE_VCS_NAME" value="" />
+    <option name="ACTIVE_VCS_NAME" value="CVS" />
   </component>
   <component name="StarteamConfiguration">
     <option name="SERVER" value="" />
