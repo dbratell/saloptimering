@@ -7,7 +7,7 @@ package salopt;
  * Time: 7:30:58 PM
  * To change this template use Options | File Templates.
  */
-public class NonLockedRandom extends java.util.Random
+public class NonLockedRandom /*extends java.util.Random */
 {
     private long mSeed;
     private final static long MULTIPLIER = 0x5DEECE66DL;
@@ -17,20 +17,22 @@ public class NonLockedRandom extends java.util.Random
     public int next(int bits)
     {
         mSeed = (mSeed * MULTIPLIER + ADDEND) & MASK;
-        return (int)(mSeed >>> (48 - bits));
+        int bitsToShiftOut = 48 - bits;
+        return (int)(mSeed >>> bitsToShiftOut);
     }
 
     synchronized public void setSeed(long seed)
     {
         System.out.println("MIN EGEN RANDOM! - setSeed");
-        super.setSeed(seed);
+//        super.setSeed(seed);
         mSeed = (seed ^ MULTIPLIER) & MASK;
     }
 
     public int cheapNextInt(int n)
     {
-        int index = next(16) % n;
-        return index;
+        int next = next(16);
+        int res = next % n;
+        return res;
     }
 
 }

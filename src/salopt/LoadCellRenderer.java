@@ -78,7 +78,7 @@ public class LoadCellRenderer extends PercentCellRenderer
         return renderingComponent;
     }
 
-    private Color mixColors(Color specialColour, Color defaultColour)
+    private static Color mixColors(Color specialColour, Color defaultColour)
     {
         if (specialColour == null)
         {

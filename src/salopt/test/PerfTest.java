@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public class PerfTest
 {
-    private static ArrayList mRooms = new ArrayList();
-    private static ArrayList mGroups = new ArrayList();
+    private static final ArrayList mRooms = new ArrayList();
+    private static final ArrayList mGroups = new ArrayList();
 
     public static void main(String[] args)
     {

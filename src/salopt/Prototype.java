@@ -79,16 +79,18 @@ public class Prototype implements SimAnnealProgressListener
 
     public static void main(String[] args)
     {
-        if (Calendar.getInstance().get(GregorianCalendar.YEAR) > 2002)
+        int lastLegalYear = 2003;
+        if (Calendar.getInstance().get(GregorianCalendar.YEAR) > lastLegalYear)
         {
             JOptionPane.showMessageDialog(null, "Prototypen är satt att fungera under\n" +
-                                                "2002 och inte senare.\n" +
+                                                lastLegalYear + " och inte senare.\n" +
                                                 "\n" +
                                                 "Kontakta Daniel Bratell för en nyare version.\n" +
                                                 "bratell@lysator.liu.se.",
                                           "Slut på provperioden", JOptionPane.ERROR_MESSAGE);
             throw new IllegalStateException("Update prototype. " +
-                                            "This is not to be used after 2002.");
+                                            "This is not to be used after " + lastLegalYear +
+                                            ".");
         }
         new Prototype().execute();
     }
@@ -458,11 +460,11 @@ public class Prototype implements SimAnnealProgressListener
         {
             TableColumn column = columnModel.getColumn(columnIndex);
             column.setPreferredWidth(20 * mRoomListModel.getPreferredRelativeWidth(columnIndex));
-            if (columnIndex == mRoomListModel.LOAD_INDEX)
+            if (columnIndex == RoomTableModel.LOAD_INDEX)
             {
                 column.setCellRenderer(new LoadCellRenderer(translator));
             }
-            else if (columnIndex == mRoomListModel.OPT_LOAD_INDEX)
+            else if (columnIndex == RoomTableModel.OPT_LOAD_INDEX)
             {
                 column.setCellRenderer(new PercentCellRenderer());
             }
@@ -512,7 +514,7 @@ public class Prototype implements SimAnnealProgressListener
         });
     }
 
-    private void setupMenu(JFrame mainWindow,
+    private static void setupMenu(JFrame mainWindow,
                            LoadRoomsAction loadRoomsAction,
                            SaveRoomsAction saveRoomsAction,
                            StartSearchAction startSearchAction,

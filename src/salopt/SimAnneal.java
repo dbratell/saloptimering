@@ -363,7 +363,7 @@ public class SimAnneal
                                             ArrayList targetContainer)
     {
         // Keep the original  (? not sure if this is good)
-        targetContainer.add(seedObject);
+        targetContainer.add(seedObject.copy());
 
         // Half is random. Half is swapping.
         int half = (NO_OF_NEW_PLACEMENTS - 1) / 2;
