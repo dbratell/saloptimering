@@ -27,13 +27,12 @@ import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
-import java.util.ArrayList;
 
 public class TableSorter extends TableMap
 {
     private int[] mIndexes;
-    private final ArrayList sortingColumns = new ArrayList();
-    private boolean ascending = true;
+    private int mSortingColumn;
+    private boolean mAscending = true;
     private static final boolean SORT_STATISTICS = false;
     private int mNoOfCompares;
 
@@ -197,16 +196,9 @@ public class TableSorter extends TableMap
             mNoOfCompares++;
         }
 
-        for (int level = 0; level < sortingColumns.size(); level++)
-        {
-            Integer column = (Integer)sortingColumns.get(level);
-            int result = compareRowsByColumn(row1, row2, column.intValue());
-            if (result != 0)
-            {
-                return ascending ? result : -result;
-            }
-        }
-        return 0;
+        int column = mSortingColumn;
+        int result = compareRowsByColumn(row1, row2, column);
+        return mAscending ? result : -result;
     }
 
     private void reallocateIndexes()
@@ -365,9 +357,8 @@ public class TableSorter extends TableMap
 
     private void sortByColumn(int column, boolean ascending)
     {
-        this.ascending = ascending;
-        sortingColumns.clear();
-        sortingColumns.add(new Integer(column));
+        mAscending = ascending;
+        mSortingColumn = column;
         sort(/*this*/);
         super.tableChanged(new TableModelEvent(this));
     }
@@ -390,8 +381,24 @@ public class TableSorter extends TableMap
                 if (e.getClickCount() == 1 && column != -1)
                 {
                     //System.out.println("Sorting ...");
-                    int shiftPressed = e.getModifiers() & InputEvent.SHIFT_MASK;
-                    boolean ascending = (shiftPressed == 0);
+                    boolean shiftPressed = (e.getModifiers() & InputEvent.SHIFT_MASK) != 0;
+                    boolean ascending;
+                    if (shiftPressed)
+                    {
+                        ascending = false;
+                    }
+                    else
+                    // Also switch order if it's the second click on the same
+                    // column
+                    if (column == mSortingColumn)
+                    {
+                        ascending = !mAscending;
+                    }
+                    else
+                    {
+                        ascending = true;
+                    }
+
                     sorter.sortByColumn(column, ascending);
                 }
             }
