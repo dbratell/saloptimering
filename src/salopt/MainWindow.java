@@ -60,7 +60,7 @@ public class MainWindow extends JFrame
         }
     }
 
-    public Component getHeaderComponent()
+    private static Component getHeaderComponent()
     {
         JLabel title = new SmoothJLabel(TITLE, JLabel.CENTER);
         title.setFont(new Font("SansSerif", Font.BOLD, 24));

@@ -795,7 +795,7 @@ public class Prototype implements SimAnnealProgressListener
         return icon;
     }
 
-    public boolean isSimAnnealSearchRunning()
+    private boolean isSimAnnealSearchRunning()
     {
         return mSimAnneal != null && mSimAnneal.isSearchRunning();
     }

@@ -94,7 +94,7 @@ public class LoadCellRenderer extends PercentCellRenderer
         return mix;
     }
 
-    private float[] toHSB(Color color)
+    private static float[] toHSB(Color color)
     {
         float[] rgb = color.getRGBComponents(null);
         float[] hsb = Color.RGBtoHSB((int)(255*rgb[0]),
