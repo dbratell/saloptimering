@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for SwingSet2 Demo Application -->
+<jnlp
+  spec="1.0+"
+  codebase="http://daniel.bratell.com/salopt"
+  href="salopt.jnlp">
+  <information>
+    <title>Saloptimering till Andreas, HIB</title>
+    <vendor>Daniel Bratell</vendor>
+    <homepage href="index.html"/>
+    <description>Hittar passande salar</description>
+    <description kind="short">Ju!</description>
+    <icon href="images/salopt-icon.gif"/>
+    <icon kind="splash" href="images/salopt-splash.jpg"/>
+    <offline-allowed/>
+  </information>
+  <security>
+      <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.4+"/>
+    <jar href="lib/salopt.jar"/>
+  </resources>
+  <application-desc main-class="salopt.Prototype"/>
+</jnlp>
