@@ -28,7 +28,7 @@ public class RoomTableModel extends AbstractTableModel
             };
 
     private static final String[] mColumnNames = {
-        "Sal", // Name
+        "Lokal", // Name
         "Platser", // Size
         "Opt. fullt", // Opt load
         "Baspris", // base cost
@@ -191,13 +191,25 @@ public class RoomTableModel extends AbstractTableModel
                 }
                 break;
             case BASE_INDEX: // Base cost
-                room.setBaseCost(((Integer)value).intValue());
+                int baseCost = ((Integer)value).intValue();
+                if (baseCost >= 0) // XXX should be allowed
+                {
+                    room.setBaseCost(baseCost);
+                }
                 break;
             case PER_PERSON_INDEX: // Per person cost
-                room.setPerPersonCost(((Integer)value).intValue());
+                int perPersonCost = ((Integer)value).intValue();
+                if (perPersonCost >= 0)  // XXX should be allowed
+                {
+                    room.setPerPersonCost(perPersonCost);
+                }
                 break;
             case NON_OPT_INDEX: // Over optimal cost
-                room.setNonOptimalPersonCost(((Integer)value).intValue());
+                int nonOptimalPersonCost = ((Integer)value).intValue();
+                if (nonOptimalPersonCost >= 0)  // XXX should be allowed
+                {
+                    room.setNonOptimalPersonCost(nonOptimalPersonCost);
+                }
                 break;
             default:
                 throw new IllegalArgumentException("No editable column " + col);
