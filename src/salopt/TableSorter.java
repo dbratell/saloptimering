@@ -16,6 +16,9 @@ package salopt;
  *
  * @version 1.5 12/17/97
  * @author Philip Milne
+ *
+ * Heavily modified by Daniel Bratell 2002-12-03. Now uses Arrays.sort
+ * and doesn't contain a lot of extra data which it did before.
  */
 
 import javax.swing.JTable;
@@ -27,21 +30,18 @@ import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
+import java.util.Arrays;
+import java.util.Comparator;
 
-public class TableSorter extends TableMap
+public class TableSorter extends TableMap implements Comparator
 {
-    private int[] mIndexes;
+    private static final boolean SORT_STATISTICS = false;
+
+    private Integer[] mIndexes;
     private int mSortingColumn;
     private boolean mAscending = true;
-    private static final boolean SORT_STATISTICS = false;
-    private int mNoOfCompares;
 
-// --Recycle Bin START (12/2/02 2:05 PM):
-//    public TableSorter()
-//    {
-//        mIndexes = new int[0]; // for consistency
-//    }
-// --Recycle Bin STOP (12/2/02 2:05 PM)
+    private int mNoOfCompares;
 
     public TableSorter(TableModel model)
     {
@@ -54,8 +54,9 @@ public class TableSorter extends TableMap
         reallocateIndexes();
     }
 
-    private int compareRowsByColumn(int row1, int row2, int column)
+    private int compareRowsByColumn(int row1, int row2)
     {
+        int column = mSortingColumn;
         Class type = mModel.getColumnClass(column);
         TableModel data = mModel;
 
@@ -189,30 +190,18 @@ public class TableSorter extends TableMap
         }
     }
 
-    private int compare(int row1, int row2)
-    {
-        if (SORT_STATISTICS)
-        {
-            mNoOfCompares++;
-        }
-
-        int column = mSortingColumn;
-        int result = compareRowsByColumn(row1, row2, column);
-        return mAscending ? result : -result;
-    }
-
     private void reallocateIndexes()
     {
         int rowCount = mModel.getRowCount();
 
         // Set up a new array of mIndexes with the right number of elements
         // for the new data mModel.
-        mIndexes = new int[rowCount];
+        mIndexes = new Integer[rowCount];
 
         // Initialise with the identity mapping.
         for (int row = 0; row < rowCount; row++)
         {
-            mIndexes[row] = row;
+            mIndexes[row] = new Integer(row);
         }
     }
 
@@ -240,98 +229,14 @@ public class TableSorter extends TableMap
         {
             mNoOfCompares = 0;
         }
-        // n2sort();
-        // qsort(0, mIndexes.length-1);
-        shuttlesort((int[])mIndexes.clone(), mIndexes, 0, mIndexes.length);
+
+        Arrays.sort(mIndexes, this);
+
         if (SORT_STATISTICS)
         {
             System.out.println("Compares: "+mNoOfCompares);
         }
     }
-
-// --Recycle Bin START (12/2/02 2:05 PM):
-//    public void n2sort()
-//    {
-//        for (int i = 0; i < getRowCount(); i++)
-//        {
-//            for (int j = i + 1; j < getRowCount(); j++)
-//            {
-//                if (compare(mIndexes[i], mIndexes[j]) == -1)
-//                {
-//                    swap(i, j);
-//                }
-//            }
-//        }
-//    }
-// --Recycle Bin STOP (12/2/02 2:05 PM)
-
-    // This is a home-grown implementation which we have not had time
-    // to research - it may perform poorly in some circumstances. It
-    // requires twice the space of an in-place algorithm and makes
-    // NlogN assigments shuttling the values between the two
-    // arrays. The number of mNoOfCompares appears to vary between N-1 and
-    // NlogN depending on the initial order but the main reason for
-    // using it here is that, unlike qsort, it is stable.
-    private void shuttlesort(int from[], int to[], int low, int high)
-    {
-        if (high - low < 2)
-        {
-            return;
-        }
-        int middle = (low + high) / 2;
-        shuttlesort(to, from, low, middle);
-        shuttlesort(to, from, middle, high);
-
-        int p = low;
-        int q = middle;
-
-        /* This is an optional short-cut; at each recursive call,
-        check to see if the elements in this subset are already
-        ordered.  If so, no further comparisons are needed; the
-        sub-array can just be copied.  The array must be copied rather
-        than assigned otherwise sister calls in the recursion might
-        get out of sinc.  When the number of elements is three they
-        are partitioned so that the first set, [low, mid), has one
-        element and and the second, [mid, high), has two. We skip the
-        optimisation when the number of elements is three or less as
-        the first compare in the normal merge will produce the same
-        sequence of steps. This optimisation seems to be worthwhile
-        for partially ordered lists but some analysis is needed to
-        find out how the performance drops to Nlog(N) as the initial
-        order diminishes - it may drop very quickly.  */
-
-        if (high - low >= 4 && compare(from[middle - 1], from[middle]) <= 0)
-        {
-            for (int i = low; i < high; i++)
-            {
-                to[i] = from[i];
-            }
-            return;
-        }
-
-        // A normal merge.
-
-        for (int i = low; i < high; i++)
-        {
-            if (q >= high || (p < middle && compare(from[p], from[q]) <= 0))
-            {
-                to[i] = from[p++];
-            }
-            else
-            {
-                to[i] = from[q++];
-            }
-        }
-    }
-
-// --Recycle Bin START (12/2/02 2:05 PM):
-//    public void swap(int i, int j)
-//    {
-//        int tmp = mIndexes[i];
-//        mIndexes[i] = mIndexes[j];
-//        mIndexes[j] = tmp;
-//    }
-// --Recycle Bin STOP (12/2/02 2:05 PM)
 
     // The mapping only affects the contents of the data rows.
     // Pass all requests to these rows through the mapping array: "mIndexes".
@@ -339,21 +244,16 @@ public class TableSorter extends TableMap
     public Object getValueAt(int aRow, int aColumn)
     {
         checkModel();
-        return mModel.getValueAt(mIndexes[aRow], aColumn);
+        return mModel.getValueAt(mIndexes[aRow].intValue(),
+                                 aColumn);
     }
 
     public void setValueAt(Object aValue, int aRow, int aColumn)
     {
         checkModel();
-        mModel.setValueAt(aValue, mIndexes[aRow], aColumn);
+        mModel.setValueAt(aValue, mIndexes[aRow].intValue(),
+                          aColumn);
     }
-
-// --Recycle Bin START (12/2/02 2:05 PM):
-//    public void sortByColumn(int column)
-//    {
-//        sortByColumn(column, true);
-//    }
-// --Recycle Bin STOP (12/2/02 2:05 PM)
 
     private void sortByColumn(int column, boolean ascending)
     {
@@ -410,6 +310,18 @@ public class TableSorter extends TableMap
     public int translateOuterRowNumberToInnerRowNumber(int outerRow)
     {
         checkModel();
-        return mIndexes[outerRow];
+        return mIndexes[outerRow].intValue();
+    }
+
+    public int compare(Object o1, Object o2)
+    {
+        if (SORT_STATISTICS)
+        {
+            mNoOfCompares++;
+        }
+
+        int result = compareRowsByColumn(((Integer)o1).intValue(),
+                                         ((Integer)o2).intValue());
+        return mAscending ? result : -result;
     }
 }
