@@ -45,6 +45,12 @@ public class SimAnneal
     private static final int NO_OF_NEW_PLACEMENTS = 200 * FORCE; // 200 works
     private SimAnnealProgressListener mProgressListener;
 
+    public SimAnneal(ArrayList rooms, ArrayList groups, int randomSeed)
+    {
+        this(rooms, groups);
+        mRandom.setSeed(randomSeed);
+    }
+
     public SimAnneal(ArrayList rooms, ArrayList groups)
     {
         mRooms = rooms;
@@ -151,8 +157,9 @@ public class SimAnneal
                 {
                     if (mTemperature < noOfGroups)
                     {
-                        mTemperature++;
+//                        mTemperature++; // XXX - the right thing to do? It slows things down
                     }
+                    mTemperature--; 
 //                noOfTriesForTemperature++;
                 }
                 else
