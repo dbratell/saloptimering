@@ -20,13 +20,11 @@ public class PercentCellRenderer extends DefaultTableCellRenderer
         Component renderingComponent;
 
         String toDisplay;
-        if (value instanceof Float)
+        if (value instanceof Number)
         {
-            toDisplay = toPercentString(((Float)value).floatValue());
-        }
-        else if (value instanceof Double)
-        {
-            toDisplay = toPercentString(((Double)value).doubleValue());
+            double number = ((Number)value).doubleValue();
+            int percent = (int)((number * 100) + 0.5);
+            toDisplay = String.valueOf(percent) + "%";
         }
         else
         {
@@ -44,8 +42,4 @@ public class PercentCellRenderer extends DefaultTableCellRenderer
         return renderingComponent;
     }
 
-    private static String toPercentString(double value)
-    {
-        return String.valueOf((int)((value * 100) + 0.5)) + "%";
-    }
 }
