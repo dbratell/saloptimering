@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class LoadCellRenderer extends DefaultTableCellRenderer
 {
     private final ArrayList mRooms;
-    private final Color LOW_LOAD_COLOR = Color.YELLOW; 
+    private final Color LOW_LOAD_COLOR = Color.YELLOW;
     private final Color BELOW_OPTIMAL_LOAD_COLOR = Color.GREEN;
     private final Color ABOVE_OPTIMAL_LOAD_COLOR = Color.ORANGE;
     private final Color HIGH_LOAD_COLOR = Color.RED;
