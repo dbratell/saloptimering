@@ -17,6 +17,20 @@ public class GroupTableModel extends AbstractTableModel
 
     private PlacementWithCost mSolution;
 
+    private static final Class[] mColumnClasses =
+            {String.class, // Name
+             Integer.class, // Size
+             String.class  //  Room
+            };
+
+    private static final String[] mColumnNames = {
+        "Grupp", // Name
+        "Antal", // Size
+        "Bästa lokal" // Room
+    };
+
+
+
     public GroupTableModel(ArrayList groups, ArrayList rooms)
     {
         mGroups = groups;
@@ -30,13 +44,15 @@ public class GroupTableModel extends AbstractTableModel
 
     public int getColumnCount()
     {
-        return 3;
+        return mColumnNames.length;
     }
 
-    public PlacementWithCost getSolution()
-    {
-        return mSolution;
-    }
+// --Recycle Bin START (12/4/02 6:54 PM):
+//    public PlacementWithCost getSolution()
+//    {
+//        return mSolution;
+//    }
+// --Recycle Bin STOP (12/4/02 6:54 PM)
 
     public void setSolution(PlacementWithCost solution)
     {
@@ -77,17 +93,12 @@ public class GroupTableModel extends AbstractTableModel
 
     public String getColumnName(int column)
     {
-        switch (column)
+        if (column < 0 || column >= mColumnNames.length)
         {
-            case 0:
-                return "Benämning";
-            case 1:
-                return "Tentander";
-            case 2:
-                return "Lokal";
-            default:
-                throw new IllegalArgumentException("No column " + column);
+            throw new IllegalArgumentException("No column " + column);
         }
+
+        return mColumnNames[column];
     }
 
     public boolean isCellEditable(int row, int col)
@@ -113,18 +124,13 @@ public class GroupTableModel extends AbstractTableModel
         fireTableCellUpdated(row, col);
     }
 
-    public Class getColumnClass(int col)
+    public Class getColumnClass(int column)
     {
-        switch (col)
+        if (column < 0 || column >= mColumnClasses.length)
         {
-            case 0: // Name
-                return String.class;
-            case 1: // Size
-                return Integer.class;
-            case 2: // Rooms
-                return String.class;
-            default:
-                throw new IllegalArgumentException("No column " + col);
+            throw new IllegalArgumentException("No column " + column);
         }
+
+        return mColumnClasses[column];
     }
 }
