@@ -1,11 +1,8 @@
 package salopt;
 
-import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.Color;
 import java.awt.Component;
-import java.util.ArrayList;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,17 +11,17 @@ import java.util.ArrayList;
  * Time: 12:04:55 PM
  * To change this template use Options | File Templates.
  */
-public class LoadCellRenderer extends DefaultTableCellRenderer
+public class LoadCellRenderer extends PercentCellRenderer
 {
-    private final ArrayList mRooms;
+    private final TableRowToRoomTranslator mRoomGetter;
     private final Color LOW_LOAD_COLOR = Color.YELLOW;
     private final Color BELOW_OPTIMAL_LOAD_COLOR = Color.GREEN;
     private final Color ABOVE_OPTIMAL_LOAD_COLOR = Color.ORANGE;
     private final Color HIGH_LOAD_COLOR = Color.RED;
 
-    public LoadCellRenderer(ArrayList rooms)
+    public LoadCellRenderer(TableRowToRoomTranslator roomGetter)
     {
-        mRooms = rooms;
+        mRoomGetter = roomGetter;
     }
 
     public Component getTableCellRendererComponent(JTable table, Object value,
@@ -45,16 +42,11 @@ public class LoadCellRenderer extends DefaultTableCellRenderer
         if (value instanceof Float)
         {
             float load = ((Float)value).floatValue();
-            String valueStr = String.valueOf((int)((load * 100) + 0.5)) + "%";
             renderingComponent =
-                    super.getTableCellRendererComponent(table, valueStr, isSelected, hasFocus, row, column);
-            if (renderingComponent instanceof JLabel)
-            {
-                ((JLabel)renderingComponent).setHorizontalAlignment(JLabel.RIGHT);
-            }
+                    super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             if (load > 0)
             {
-                Room room = getRoom(row);
+                Room room = mRoomGetter.translate(row);
                 float optLoad = room.getOptimalNonEmptyLoad();
                 if (load < optLoad / 2)
                 {
@@ -110,15 +102,5 @@ public class LoadCellRenderer extends DefaultTableCellRenderer
                                        (int)(255*rgb[2]),
                                        null);
         return hsb;
-    }
-
-    private Room getRoom(int index)
-    {
-        if (index < 0 || index >= mRooms.size())
-        {
-            return null;
-        }
-
-        return (Room)mRooms.get(index);
     }
 }

@@ -22,7 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
-import javax.swing.plaf.basic.BasicLabelUI;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
@@ -428,15 +427,29 @@ public class Prototype implements SimAnnealProgressListener
     private Box createRoomListBox()
     {
         mRoomListModel = new RoomTableModel(mRooms, mGroups);
+        TableRowToRoomTranslator translator;
         if (SORTED_ROOM_TABLE)
         {
-            TableSorter sorter = new TableSorter(mRoomListModel); //Sorting
+            final TableSorter sorter = new TableSorter(mRoomListModel); //Sorting
             mRoomTable = new JTable(sorter);             //Sorting
             sorter.addMouseListenerToHeaderInTable(mRoomTable); //Sorting
+            translator = new TableRowToRoomTranslator(){
+                    public Room translate(int rowNumber)
+                    {
+                        int innerRowNo = sorter.translateOuterRowNumberToInnerRowNumber(rowNumber);
+                        return (Room)mRooms.get(innerRowNo);
+                    }
+                };
         }
         else
         {
             mRoomTable = new JTable(mRoomListModel);  // Without sorting
+            translator = new TableRowToRoomTranslator(){
+                    public Room translate(int rowNumber)
+                    {
+                        return (Room)mRooms.get(rowNumber);
+                    }
+                };
         }
 
         int columnCount = mRoomListModel.getColumnCount();
@@ -447,7 +460,11 @@ public class Prototype implements SimAnnealProgressListener
             column.setPreferredWidth(20 * mRoomListModel.getPreferredRelativeWidth(columnIndex));
             if (columnIndex == mRoomListModel.LOAD_INDEX)
             {
-                column.setCellRenderer(new LoadCellRenderer(mRooms));
+                column.setCellRenderer(new LoadCellRenderer(translator));
+            }
+            else if (columnIndex == mRoomListModel.OPT_LOAD_INDEX)
+            {
+                column.setCellRenderer(new PercentCellRenderer());
             }
         }
 
@@ -892,6 +909,4 @@ public class Prototype implements SimAnnealProgressListener
             }
         }
     }
-
-
 }

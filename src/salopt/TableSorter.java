@@ -240,7 +240,7 @@ public class TableSorter extends TableMap
         }
     }
 
-    private void sort(Object sender)
+    private void sort(/*Object sender */)
     {
         checkModel();
 
@@ -368,7 +368,7 @@ public class TableSorter extends TableMap
         this.ascending = ascending;
         sortingColumns.clear();
         sortingColumns.add(new Integer(column));
-        sort(this);
+        sort(/*this*/);
         super.tableChanged(new TableModelEvent(this));
     }
 
@@ -398,5 +398,11 @@ public class TableSorter extends TableMap
         };
         JTableHeader th = tableView.getTableHeader();
         th.addMouseListener(listMouseListener);
+    }
+
+    public int translateOuterRowNumberToInnerRowNumber(int outerRow)
+    {
+        checkModel();
+        return mIndexes[outerRow];
     }
 }

@@ -51,7 +51,7 @@ public class RoomTableModel extends AbstractTableModel
 
     private static final int NAME_INDEX = 0;
     private static final int SIZE_INDEX = 1;
-    private static final int OPT_LOAD_INDEX = 2;
+    static final int OPT_LOAD_INDEX = 2;
     private static final int BASE_INDEX = 3;
     private static final int PER_PERSON_INDEX = 4;
     private static final int NON_OPT_INDEX = 5;
