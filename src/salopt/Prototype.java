@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
+import javax.swing.plaf.basic.BasicLabelUI;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
@@ -56,22 +57,26 @@ import java.net.URL;
  */
 public class Prototype implements SimAnnealProgressListener
 {
-    private final ArrayList mRooms = new ArrayList();
-    private final ArrayList mGroups = new ArrayList();
     private static final boolean TRY_SMART_BRUTE_FORCE = false;
     private static final boolean SORTED_ROOM_TABLE = true;
     private static final boolean SORTED_GROUP_TABLE = true;
 
+    // Data
+    private final ArrayList mRooms = new ArrayList();
+    private final ArrayList mGroups = new ArrayList();
+    private SimAnneal mSimAnneal;
+
+    // UI models/data
     private RoomTableModel mRoomListModel;
     private GroupTableModel mGroupListModel;
-    private JTextArea mMessageBox;
-    private JProgressBar mProgressBar;
-    private boolean mSimAnnealSearchRunning;
-    private SimAnneal mSimAnneal;
-    private JLabel mStatusMessage;
+
+    // UI
+    private MainWindow mMainWindow;
     private JTable mRoomTable;
     private JTable mGroupTable;
-    private MainWindow mMainWindow;
+    private JTextArea mMessageBox;
+    private JProgressBar mProgressBar;
+    private JLabel mStatusMessage;
 
     public static void main(String[] args)
     {
@@ -219,7 +224,7 @@ public class Prototype implements SimAnnealProgressListener
         {
             mMainWindow.pack();
         }
-        mMainWindow.setEnabledForComponents(mSimAnnealSearchRunning);
+        mMainWindow.setEnabledForRunningSearch(isSimAnnealSearchRunning());
         mMainWindow.setVisible(true);
     }
 
@@ -287,7 +292,7 @@ public class Prototype implements SimAnnealProgressListener
         {
             public void tableChanged(TableModelEvent e)
             {
-                if (mSimAnnealSearchRunning)
+                if (isSimAnnealSearchRunning())
                 {
                     // XXX - this must not happen
                     return;
@@ -320,7 +325,7 @@ public class Prototype implements SimAnnealProgressListener
                 {
                     public void actionPerformed(ActionEvent e)
                     {
-                        if (mSimAnnealSearchRunning)
+                        if (isSimAnnealSearchRunning())
                         {
                             searchRunningDialog();
                             return;
@@ -356,7 +361,7 @@ public class Prototype implements SimAnnealProgressListener
                 {
                     public void actionPerformed(ActionEvent e)
                     {
-                        if (mSimAnnealSearchRunning)
+                        if (isSimAnnealSearchRunning())
                         {
                             searchRunningDialog();
                             return;
@@ -377,7 +382,7 @@ public class Prototype implements SimAnnealProgressListener
                 {
                     public void actionPerformed(ActionEvent e)
                     {
-                        if (mSimAnnealSearchRunning)
+                        if (isSimAnnealSearchRunning())
                         {
                             searchRunningDialog();
                             return;
@@ -407,7 +412,7 @@ public class Prototype implements SimAnnealProgressListener
                 {
                     public void actionPerformed(ActionEvent e)
                     {
-                        if (mSimAnnealSearchRunning)
+                        if (isSimAnnealSearchRunning())
                         {
                             searchRunningDialog();
                             return;
@@ -450,7 +455,7 @@ public class Prototype implements SimAnnealProgressListener
         {
             public void tableChanged(TableModelEvent e)
             {
-                if (mSimAnnealSearchRunning)
+                if (isSimAnnealSearchRunning())
                 {
                     // XXX - this must not happen
                     return;
@@ -635,21 +640,20 @@ public class Prototype implements SimAnnealProgressListener
 
     private void trySimulatedAnnealing()
     {
-        mSimAnnealSearchRunning = true;
         if (mSimAnneal == null)
         {
-            mSimAnneal = new SimAnneal(mRooms, mGroups, this);
+            mSimAnneal = new SimAnneal(mRooms, mGroups);
         }
 
         Runnable runnable = new Runnable()
         {
             public void run()
             {
+                mSimAnneal.addListener(Prototype.this);
                 displayStatusMessage("Working...");
-                mMainWindow.setEnabledForComponents(true);
+                mMainWindow.setEnabledForRunningSearch(true);
                 long startTime = System.currentTimeMillis();
                 mSimAnneal.search();
-                mSimAnnealSearchRunning = false;
                 String message = "Total time: " + (System.currentTimeMillis() - startTime) + " ms";
                 System.out.println(message);
                 displayMessage(message);
@@ -717,10 +721,10 @@ public class Prototype implements SimAnnealProgressListener
             mProgressBar.setIndeterminate(false);
             mProgressBar.setVisible(false);
         }
-        mSimAnnealSearchRunning = false;
+        mSimAnneal.removeListener(this);
         displayStatusMessage("Klar");
         displayMessage("Sökning avslutad.");
-        mMainWindow.setEnabledForComponents(false);
+        mMainWindow.setEnabledForRunningSearch(false);
     }
 
     public void onNewBest(PlacementWithCost solution, String solutionDescription, int cost)
@@ -744,7 +748,7 @@ public class Prototype implements SimAnnealProgressListener
 
     private void clearSearch()
     {
-        if (mSimAnnealSearchRunning)
+        if (isSimAnnealSearchRunning())
         {
             throw new IllegalStateException("Can not clear search data while " +
                                             "the search is running.");
@@ -774,6 +778,11 @@ public class Prototype implements SimAnnealProgressListener
         return icon;
     }
 
+    public boolean isSimAnnealSearchRunning()
+    {
+        return mSimAnneal != null && mSimAnneal.isSearchRunning();
+    }
+
     class LoadRoomsAction extends AbstractAction
     {
         public LoadRoomsAction(String text, ImageIcon icon,
@@ -786,7 +795,7 @@ public class Prototype implements SimAnnealProgressListener
 
         public void actionPerformed(ActionEvent e)
         {
-            if (!mSimAnnealSearchRunning)
+            if (!isSimAnnealSearchRunning())
             {
                 JFileChooser fileChooser = new JFileChooser();
                 int returnVal = fileChooser.showOpenDialog(mMainWindow);
@@ -811,7 +820,7 @@ public class Prototype implements SimAnnealProgressListener
 
         public void actionPerformed(ActionEvent e)
         {
-            if (!mSimAnnealSearchRunning)
+            if (!isSimAnnealSearchRunning())
             {
                 JFileChooser fileChooser = new JFileChooser();
                 int returnVal = fileChooser.showSaveDialog(mMainWindow);
@@ -837,7 +846,7 @@ public class Prototype implements SimAnnealProgressListener
 
         public void actionPerformed(ActionEvent e)
         {
-            if (!mSimAnnealSearchRunning)
+            if (!isSimAnnealSearchRunning())
             {
                 clearSearch(); // Forget everything
                 trySimulatedAnnealing();
@@ -857,7 +866,7 @@ public class Prototype implements SimAnnealProgressListener
 
         public void actionPerformed(ActionEvent e)
         {
-            if (mSimAnnealSearchRunning)
+            if (isSimAnnealSearchRunning())
             {
                 // Will block until search stopped
                 mSimAnneal.stopSearch();
@@ -877,7 +886,7 @@ public class Prototype implements SimAnnealProgressListener
 
         public void actionPerformed(ActionEvent e)
         {
-            if (!mSimAnnealSearchRunning)
+            if (!isSimAnnealSearchRunning())
             {
                 trySimulatedAnnealing();
             }

@@ -84,7 +84,7 @@ public class MainWindow extends JFrame
         }
     }
 
-    public void setEnabledForComponents(final boolean searchRunning)
+    public void setEnabledForRunningSearch(final boolean searchRunning)
     {
         Runnable runnable = new Runnable()
         {

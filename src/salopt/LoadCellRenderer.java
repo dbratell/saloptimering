@@ -17,11 +17,10 @@ import java.util.ArrayList;
 public class LoadCellRenderer extends DefaultTableCellRenderer
 {
     private final ArrayList mRooms;
-    private final Color LOW_LOAD_COLOR = Color.YELLOW.brighter(); // XXX Should be something else
-    private final Color BELOW_OPTIMAL_LOAD_COLOR = Color.GREEN.brighter();
-    private final Color ABOVE_OPTIMAL_LOAD_COLOR = Color.ORANGE.brighter();
-    private final Color HIGH_LOAD_COLOR = Color.RED.brighter();
-    private static final Color DEFAULT_BACKGROUND_COLOR = Color.WHITE;
+    private final Color LOW_LOAD_COLOR = Color.YELLOW; 
+    private final Color BELOW_OPTIMAL_LOAD_COLOR = Color.GREEN;
+    private final Color ABOVE_OPTIMAL_LOAD_COLOR = Color.ORANGE;
+    private final Color HIGH_LOAD_COLOR = Color.RED;
 
     public LoadCellRenderer(ArrayList rooms)
     {
@@ -32,7 +31,17 @@ public class LoadCellRenderer extends DefaultTableCellRenderer
                                                    boolean isSelected, boolean hasFocus, int row, int column)
     {
         Component renderingComponent;
+        Color defaultBackground;
+        if (isSelected)
+        {
+            defaultBackground = table.getSelectionBackground();
+        }
+        else
+        {
+            defaultBackground = table.getBackground();
+        }
 
+        Color specialBackground = null;
         if (value instanceof Float)
         {
             float load = ((Float)value).floatValue();
@@ -43,37 +52,64 @@ public class LoadCellRenderer extends DefaultTableCellRenderer
             {
                 ((JLabel)renderingComponent).setHorizontalAlignment(JLabel.RIGHT);
             }
-            Room room = getRoom(row);
-            float optLoad = room.getOptimalNonEmptyLoad();
-            if (load <= 0)
+            if (load > 0)
             {
-                renderingComponent.setBackground(DEFAULT_BACKGROUND_COLOR); // XXX (dynamic)
-            }
-            if (load < optLoad / 2)
-            {
-                renderingComponent.setBackground(LOW_LOAD_COLOR);
-            }
-            else if (load < optLoad)
-            {
-                renderingComponent.setBackground(BELOW_OPTIMAL_LOAD_COLOR);
-            }
-            else if (load < (optLoad + 1) / 2)
-            {
-                renderingComponent.setBackground(ABOVE_OPTIMAL_LOAD_COLOR);
-            }
-            else
-            {
-                renderingComponent.setBackground(HIGH_LOAD_COLOR);
+                Room room = getRoom(row);
+                float optLoad = room.getOptimalNonEmptyLoad();
+                if (load < optLoad / 2)
+                {
+                    specialBackground = LOW_LOAD_COLOR;
+                }
+                else if (load < optLoad)
+                {
+                    specialBackground = BELOW_OPTIMAL_LOAD_COLOR;
+                }
+                else if (load < (optLoad + 1) / 2)
+                {
+                    specialBackground = ABOVE_OPTIMAL_LOAD_COLOR;
+                }
+                else
+                {
+                    specialBackground = HIGH_LOAD_COLOR;
+                }
             }
         }
         else
         {
             renderingComponent =
                     super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            renderingComponent.setBackground(DEFAULT_BACKGROUND_COLOR); // XXX (dynamic)
         }
 
+        renderingComponent.setBackground(mixColors(specialBackground,
+                                                   defaultBackground));
+
         return renderingComponent;
+    }
+
+    private Color mixColors(Color specialColour, Color defaultColour)
+    {
+        if (specialColour == null)
+        {
+            return defaultColour;
+        }
+        // Mix in HSV
+        float[] c1hsb = toHSB(specialColour);
+        float[] c2hsb = toHSB(defaultColour);
+        float h = c1hsb[0]; // the same "colour" as the base.
+        float s = (c1hsb[1]+c2hsb[1])/2;
+        float b = (c1hsb[2]+c2hsb[2])/2;
+        Color mix = Color.getHSBColor(h, s, b);
+        return mix;
+    }
+
+    private float[] toHSB(Color color)
+    {
+        float[] rgb = color.getRGBComponents(null);
+        float[] hsb = Color.RGBtoHSB((int)(255*rgb[0]),
+                                       (int)(255*rgb[1]),
+                                       (int)(255*rgb[2]),
+                                       null);
+        return hsb;
     }
 
     private Room getRoom(int index)

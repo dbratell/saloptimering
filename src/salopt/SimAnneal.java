@@ -30,7 +30,7 @@ public class SimAnneal
     private final NonLockedRandom mRandom = new NonLockedRandom();
 
     private final Object mStopSignal = new Object();
-    private volatile boolean mStopSearch = false;
+    private volatile boolean mStopSearch = true;
 
     // Debug
     private static final boolean DEBUG_GENE_POOL = false;
@@ -43,14 +43,12 @@ public class SimAnneal
     private static final int NO_OF_RANDOM_GENES = 5 * FORCE; // 5 works
 //    private static final int TRIES_PER_TEMPERATURE = 2*FORCE; // 3-5 works
     private static final int NO_OF_NEW_PLACEMENTS = 200 * FORCE; // 200 works
-    private final SimAnnealProgressListener mProgressListener;
+    private SimAnnealProgressListener mProgressListener;
 
-    public SimAnneal(ArrayList rooms, ArrayList groups,
-                     SimAnnealProgressListener progressListener)
+    public SimAnneal(ArrayList rooms, ArrayList groups)
     {
         mRooms = rooms;
         mGroups = groups;
-        mProgressListener = progressListener;
 
         int groupCount = mGroups.size();
         if (groupCount < 2)
@@ -83,6 +81,15 @@ public class SimAnneal
         }
 
         mNoOfPeopleInRoom = new int[roomCount];
+    }
+
+    public void addListener(SimAnnealProgressListener listener)
+    {
+        if (mProgressListener != null)
+        {
+            throw new IllegalStateException("There is already a listener.");
+        }
+        mProgressListener = listener;
     }
 
     public void search()
@@ -178,9 +185,11 @@ public class SimAnneal
         }
         finally
         {
+            mStopSearch = true;
+
             reportFinished(mCheapestSolution, arrayToString(mCheapestSolution.mPlacement),
                            mCheapestSolution.getCost());
-            System.out.println("PlacementWithCost.sObjCreatedCount = " + PlacementWithCost.sObjCreatedCount);
+            System.out.println("PlacementWithCost.sObjCreatedCount = " + PlacementWithCost.sObjCreatedCount); // XXX
         }
     }
 
@@ -505,7 +514,7 @@ public class SimAnneal
         {
             return "null solution";
         }
-        
+
         StringBuffer buf = new StringBuffer();
         String seperator = "";
         int[] roomUsage = new int[mRooms.size()];
@@ -570,6 +579,19 @@ public class SimAnneal
                 }
             }
         }
+    }
+
+    public void removeListener(SimAnnealProgressListener listener)
+    {
+        if (mProgressListener == listener)
+        {
+            mProgressListener = null;
+        }
+    }
+
+    public boolean isSearchRunning()
+    {
+        return !mStopSearch; // XXX: A little optimistic. Well.
     }
 
 }
